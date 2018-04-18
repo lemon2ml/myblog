@@ -1,0 +1,4 @@
+## myblog demo
+
+-django
+-nginx
