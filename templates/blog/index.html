@@ -13,12 +13,20 @@
                 <span class="post-date"><a href="#"><time class="entry-date"
                                                           datetime="{{post.created_time }}">{{ post.created_time }}</time></a></span>
                 <span class="post-author"><a href="#">{{ post.author }}</a></span>
-                <span class="comments-link"><a href="#">4 评论</a></span>
-                <span class="views-count"><a href="#">588 阅读</a></span>
+                <span class="comments-link"><a href="#">{{ post.comment_set.count }} 评论</a></span>
+                <span class="views-count"><a href="{{ post.get_absolute_url}}">{{ post.views }} 阅读</a></span>
             </div>
         </header>
         <div class="entry-content clearfix">
-            <p>{{post.excerpt }}</p>
+            <p>
+                {% if post.excerpt %}
+                {{ post.excerpt }}
+                {% else %}
+                {{ post.body | truncatechars_html:54 }}
+                {% endif %}
+
+
+            </p>
             <div class="read-more cl-effect-14">
                 <a href="{{ post.get_absolute_url }}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
             </div>
@@ -34,19 +42,20 @@
         <a href="#">下一页</a>
     </div>
     -->
-    <div class="pagination">
-        <ul>
-            <li><a href="">1</a></li>
-            <li><a href="">...</a></li>
-            <li><a href="">4</a></li>
-            <li><a href="">5</a></li>
-            <li class="current"><a href="">6</a></li>
-            <li><a href="">7</a></li>
-            <li><a href="">8</a></li>
-            <li><a href="">...</a></li>
-            <li><a href="">11</a></li>
-        </ul>
-    </div>
+
+    {% if is_paginated %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}">上一页</a></li>
+            {% endif%}
+
+            <li class="current"><a href="?page={{ page_obj.number}}">第{{ page_obj.number}}页</a>/共{{ paginator.num_pages }}页</li>
+
+            {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}">下一页</a></li>
+            {% endif%}
+        </div>  
+    {% endif%}
 
 
 

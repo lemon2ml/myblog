@@ -25,7 +25,7 @@ SECRET_KEY = '393y795jb$5xe-p*&cdr35f-o)6@v**6bqwbysxry)1-mzn88l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.20.156.180',]
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -76,18 +76,18 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
-    'default':{
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'myblog',
-        'USER': 'root',
-        'PASSWORD':'111111',
-        'HOST': '172.20.156.180',
-        'PORT': '3306',
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default':{
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'myblog',
+    #     'USER': 'root',
+    #     'PASSWORD':'111111',
+    #     'HOST': '172.20.156.180',
+    #     'PORT': '3306',
+    # }
 }
 
 
@@ -130,3 +130,5 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
